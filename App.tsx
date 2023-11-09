@@ -1,25 +1,40 @@
 import { StatusBar } from "expo-status-bar";
-import { MD3DarkTheme, PaperProvider } from "react-native-paper";
-import { DarkTheme, NavigationContainer } from "@react-navigation/native";
+import {
+  DefaultTheme as DefaultPaperTheme,
+  PaperProvider,
+} from "react-native-paper";
+import {
+  DefaultTheme as DefaultNavigationTheme,
+  NavigationContainer,
+} from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "react-query";
+import * as SplashScreen from "expo-splash-screen";
 
 import RootStack from "./src/navigation";
 
-const CombinedDarkTheme = {
-  ...DarkTheme,
-  ...MD3DarkTheme,
+const CombinedDefaultTheme = {
+  ...DefaultNavigationTheme,
+  ...DefaultPaperTheme,
   colors: {
-    ...DarkTheme.colors,
-    ...MD3DarkTheme.colors,
+    ...DefaultNavigationTheme.colors,
+    ...DefaultPaperTheme.colors,
   },
 };
 
+const queryClient = new QueryClient();
+
+// Keep the splash screen visible while we fetch resources
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
   return (
-    <PaperProvider theme={CombinedDarkTheme}>
-      <NavigationContainer theme={CombinedDarkTheme}>
-        <RootStack />
-        <StatusBar style="inverted" />
-      </NavigationContainer>
-    </PaperProvider>
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider>
+        <NavigationContainer theme={CombinedDefaultTheme}>
+          <RootStack />
+          <StatusBar style="dark" />
+        </NavigationContainer>
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }
