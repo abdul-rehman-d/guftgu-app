@@ -1,20 +1,25 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { MD3DarkTheme, PaperProvider } from "react-native-paper";
+import { DarkTheme, NavigationContainer } from "@react-navigation/native";
+
+import RootStack from "./src/navigation";
+
+const CombinedDarkTheme = {
+  ...DarkTheme,
+  ...MD3DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    ...MD3DarkTheme.colors,
+  },
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PaperProvider theme={CombinedDarkTheme}>
+      <NavigationContainer theme={CombinedDarkTheme}>
+        <RootStack />
+        <StatusBar style="inverted" />
+      </NavigationContainer>
+    </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
