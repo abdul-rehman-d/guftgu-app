@@ -6,7 +6,7 @@ import useAuth from "../hooks/auth";
 import { HomeScreen } from "../screens";
 import OnBoardingStack from "./OnBoarding";
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamsList>();
 
 const RootStack: React.FC<{}> = ({}) => {
   const { data: authData, isLoading } = useAuth();
