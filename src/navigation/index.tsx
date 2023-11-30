@@ -5,11 +5,14 @@ import * as SplashScreen from "expo-splash-screen";
 import useAuth from "../hooks/auth";
 import { HomeScreen } from "../screens";
 import OnBoardingStack from "./OnBoarding";
+import { useTheme } from "react-native-paper";
 
 const Stack = createNativeStackNavigator<RootStackParamsList>();
 
 const RootStack: React.FC<{}> = ({}) => {
   const { data: authData, isLoading } = useAuth();
+
+  const theme = useTheme();
 
   const isLoggedIn = authData?.isLoggedIn;
 
@@ -20,7 +23,14 @@ const RootStack: React.FC<{}> = ({}) => {
   }, [isLoading]);
 
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerTintColor: theme.colors.primary,
+        headerStyle: {
+          backgroundColor: theme.colors.background,
+        },
+      }}
+    >
       {isLoggedIn ? (
         <Stack.Screen name="Home" component={HomeScreen} />
       ) : (
