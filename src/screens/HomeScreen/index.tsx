@@ -1,24 +1,12 @@
-import { ReactNode, useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { useTheme } from "react-native-paper";
 
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import type {
-  SceneRendererProps,
-  NavigationState,
-} from "react-native-tab-view";
 import { useWindowDimensions } from "react-native";
 
-type SceneProps = SceneRendererProps & {
-  route: {
-    key: string;
-    title: string;
-  };
-};
+import { ChatsTab } from "../../components/custom";
 
-function ChatsTab({}: SceneProps): ReactNode {
-  return <></>;
-}
 function StatusTab(): ReactNode {
   return <></>;
 }
